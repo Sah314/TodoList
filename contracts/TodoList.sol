@@ -8,6 +8,11 @@ struct Task{
     bool completed;
 }
 mapping(uint => Task) public  tasks;
+event TaskCreated(
+ uint id,
+    string Content, 
+    bool completed
+);
 constructor() public{
     createTask("Padhai kar lo");
 
@@ -15,5 +20,6 @@ constructor() public{
 function createTask(string memory _content) public{
     taskcount++;
     tasks[taskcount] = Task(taskcount , _content , false);
+    emit TaskCreated(taskcount, _content, false);
 }
 }
